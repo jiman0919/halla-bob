@@ -1,0 +1,138 @@
+/* 기본 설정 */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: #f4f5f7;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+.mobile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  padding-bottom: 60px;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+/* 헤더 */
+.app-header {
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+.app-header h1 { margin: 0; font-size: 1.3rem; color: #191f28; }
+
+/* 섹션 */
+.section-today, .section-daily-nav { padding: 25px 20px 10px 20px; }
+.section-title {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.today-date { font-size: 0.9rem; color: #8b95a1; font-weight: normal; }
+
+/* 오늘의 학식 (세로 리스트) */
+.today-list { display: flex; flex-direction: column; gap: 15px; }
+.menu-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e5e8eb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.menu-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+}
+.menu-card.조식::before { background: #4dabf7; }
+.menu-card.중식::before { background: #4dabf7; }
+.menu-card.석식::before { background: #4dabf7; }
+
+.badge {
+  display: inline-block; padding: 4px 10px; background: #f2f4f6;
+  border-radius: 6px; font-size: 0.85rem; font-weight: bold; color: #4e5968; margin-bottom: 10px;
+}
+.menu-content { font-size: 1rem; line-height: 1.6; color: #333; word-break: keep-all; }
+.empty-card { text-align: center; padding: 30px; background: #f9fafb; border-radius: 12px; color: #8b95a1; }
+.divider { border: none; height: 8px; background-color: #f4f5f7; margin: 20px 0; }
+
+/* --- 날짜 네비게이션 --- */
+.date-navigator {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #f9fafb; padding: 10px 15px; border-radius: 10px; margin-bottom: 20px;
+}
+.nav-btn {
+  background: white; border: 1px solid #ddd; border-radius: 8px;
+  width: 36px; height: 36px; font-size: 1.2rem; color: #555;
+  cursor: pointer; display: flex; justify-content: center; align-items: center;
+  transition: background 0.2s;
+}
+.nav-btn:active { background: #eee; }
+
+.current-date-display { font-size: 1.1rem; font-weight: bold; color: #333; }
+.day-text { font-size: 0.9rem; color: #888; margin-left: 5px; font-weight: normal; }
+
+/* --- [애니메이션] 슬라이드 효과 --- */
+.daily-menu-list {
+  display: flex; flex-direction: column; gap: 15px;
+  /* 애니메이션 기본 설정 */
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+}
+
+/* 오른쪽에서 등장 (다음 날짜) */
+.daily-menu-list.slide-in-right {
+  animation-name: slideInRight;
+}
+
+/* 왼쪽에서 등장 (이전 날짜) */
+.daily-menu-list.slide-in-left {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px); /* 오른쪽에서 시작 */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px); /* 왼쪽에서 시작 */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 리스트 아이템 스타일 */
+.daily-item {
+  display: flex; align-items: flex-start; padding: 15px;
+  background: white; border: 1px solid #eee; border-radius: 12px;
+}
+.daily-type { width: 50px; flex-shrink: 0; margin-right: 15px; }
+.mini-badge {
+  display: block; text-align: center; font-size: 0.8rem;
+  padding: 4px 0; border-radius: 6px; color: white; font-weight: bold;
+}
+.mini-badge.조식 { background-color: #4dabf7; }
+.mini-badge.중식 { background-color: #4dabf7; }
+.mini-badge.석식 { background-color: #4dabf7; }
+.daily-menu-text { font-size: 0.95rem; line-height: 1.5; color: #333; word-break: keep-all; }
+.no-data-day { text-align: center; padding: 40px 0; color: #aaa; font-size: 0.9rem; }
+.error-box { margin: 20px; padding: 15px; background: #fff5f5; color: #fa5252; border-radius: 8px; text-align: center; }
