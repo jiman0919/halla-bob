@@ -8,7 +8,10 @@ import datetime
 app = FastAPI()
 
 # --- CORS 설정 ---
-origins = ["http://localhost:3000"]
+origins = [
+    "https://halla-bob.vercel.app",
+    "*"      
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -40,7 +43,7 @@ def scheduled_crawling_job():
 @app.on_event("startup")
 def start_scheduler():
     database.init_db()
-    scheduler = BackgroundScheduler()
+    scheduler = BackgroundScheduler(timezone="Asia/Seoul")
     
     # 수정된 부분: day_of_week='mon' 추가 (월요일만 실행)
     scheduler.add_job(scheduled_crawling_job, 'cron', day_of_week='mon', hour=6, minute=0)
