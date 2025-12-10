@@ -39,6 +39,7 @@ def scheduled_crawling_job():
 # ---------------------------------------------------------
 @app.on_event("startup")
 def start_scheduler():
+    database.init_db()
     scheduler = BackgroundScheduler()
     
     # 수정된 부분: day_of_week='mon' 추가 (월요일만 실행)
