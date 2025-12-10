@@ -16,7 +16,7 @@ function App() {
     setViewDate(formattedDate);
 
     // 2. 데이터 가져오기
-    fetch("http://127.0.0.1:8000/menus")
+    fetch("https://halla-bob-backend.onrender.com/menus")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
